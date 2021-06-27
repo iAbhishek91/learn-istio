@@ -28,21 +28,22 @@ data:
 - Left menu
   - Overview: shows all the namespace Istio is monitoring, applicaitons(pods) count and status, as well as traffic
   - Graph:
-    - shows the dynamic view of links and status between the pods or services (select the namespace from top dropdown, and the graph: "version app graph").
+    - shows the dynamic view of links and status between the pods or services (select the namespace from top dropdown, and the graph: "service graph").
     - For any symbol please refer to legend at the bottom of the page.
     - Incoming status and Outgoing status
     - Also have layout to change how the graph looks like(fairly simple)
     - double click on the nodes of the graph will change the view and show incoming and outgoing traffic of that node only.
     - right click on the service or pod to get the information about.
     - Response time in the deplay dropdown will work only with "Workload graph"
+    - "Version app graph" displays two separate version of the app when marked by label "version" and has same "app" label.
   - Applications:
-    - shows all the pods, pods are referred as applications.
+    - they are logical grouping of workloads by application("app") labels
   - Services
-    - From kiali, Actions(top-right), we can manage traffic: "create wighted routing", "create matching routing" and "suspend traffic". *Under the hood, a VirtualService & destinationRules is created automatically by kiali*
+    - From kiali, Actions(top-right), we can manage traffic: **create wighted routing**(creates a canary), **create matching routing** and **suspend traffic**. *Under the hood, a VirtualService & destinationRules is created automatically by kiali*
   - Istio Config
     - shows virtualServices and DestinationRules
   - workloads
-    - all the pods behind a services.
+    - all type of pods that exists, *there are different type of workload, however only deployment workloads are supported*
 
 > NOTE: important legend: grey arrow indicates that there is no traffice b/w the services. Also if there is NO traffic for long time, the line/arrow between the edge are removed(stale connection are shown).
 

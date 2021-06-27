@@ -1,11 +1,22 @@
 # Terms associated with Istio
 
+- Pilot: its a older name, just consider it as control plane now or IstioD
 - Control Plane: Collectively whats running on istio-system namespace is referred as Control Plane.
-- Data Plane: The proxy pods are collectively called Data plane in Istio.
-- Jaeger: UI used for tracing pod, located control plane.
+- Data Plane: The envoy proxy sidecar contianers are collectively called Data plane in Istio.
+- Jaeger: UI used for distributed tracing pod, located control plane.
 - Kiali: UI for having a overview of Istio
-- Telemetry: is basically gathering of mertices and representing things on UI, it includes Kiali, Jaeger and Grafana.
-- Trace: tracing entire request and response is known as trace
-- Span: each section in a trace is called span
-- Upstream pods: when a pod request another pod (that request is called upstream request)
-- downstream pods: when a pod response to another pod(that request is called downstream request)
+- Telemetry: is basically gathering of mertices and representing things on UI, it includes Kiali, Jaeger and Grafana and more.
+- Trace: tracing entire request and response is known as trace.
+- Span: each section in a trace is called span.
+- Upstream pods/request: when a pod request another pod (that request is called upstream request)
+- Downstream pods/request: when a pod response to another pod(that request is called downstream request)
+- workloads: is  a term used by Istio and kiali
+- Application: in kiali, applications are logical grouping of workloads by "app" labels, in details its explained in canaries.md
+- Configuration types: istio objects are reffered as configuration type, these are differenet thing we can create after deploying Istio CRD.
+  - Gateway: configuration type,
+  - VirtualService: configuration type,
+  - DestinationRule: configuration type,
+  - Serviceentry: configuration type,
+  - Rule: configuration type,
+  - Quota: configuration type,
+  - QuotaSpecBinding: configuration type,
