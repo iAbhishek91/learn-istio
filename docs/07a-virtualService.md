@@ -15,7 +15,7 @@ metadata:
   name: somename # for consistency keep it same as the service
 spec:
   hosts:
-    - fleetman-staff-service.default.svc.cluster.local # from where requests are coming, this service will forward to the app
+    - fleetman-staff-service.default.svc.cluster.local # from where requests are coming, this service will forward to the app. To be explicit we're applying regular kubernetes service name. that we are applying the routing rules to. It may be something coming from externally.
   http:
     - route:
         - destination:
@@ -32,6 +32,8 @@ FOR VISUALISATION, **WHERE DOES A VIRTUALSERVICE FITS IN KUBERNETES**
 
 - When we create a virtual service, we send these to IstioD or Pilot in control-plane, and in turn Istiod will distribute those configuration to proxies.
 - Under the hood, the job is done by Envoy, Istio is just distributing those configuration to all the Envoy proxy in an efficient manner.
+- Kubernetes services(service discovery) are no where replaced by Istio VirtualService(as it applies routing rules using label selectors). The envoy proxy still need to use kubernetes service to identify the pods however it can apply some dynamic rules.
+- OPTIONAL: only if you want to configure dynamic routing rules, then only virtual service is required.
 
 > NOTE: K8S service are nothing to do with Istio VirtualService. They are completely independent, different and unrelated.
 
@@ -69,7 +71,7 @@ spec:
       name: all-pods
 ```
 
-While using virtual service along with Gateway:
+While using virtual service along with Gateway, use the below YAML:
 
 ```yaml
 kind: VirtualService
@@ -96,4 +98,91 @@ spec:
             host: fleetman-webapp
             subset: experimental
           weight: 10
+```
+
+While using virtual service for path based routing
+
+We can matches based on route, headers etc
+
+> NO change requried in Destination Rules and Gateway
+
+```yaml
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: fleetman-webapp
+  namespace: default
+spec:
+  hosts:      # which incoming host are we applying the proxy rules to???
+    - "*"
+  gateways:
+    - ingress-gateway-configuration
+  http:
+    - match:
+      - uri:  # IF
+          prefix: "/experimental"
+      - uri:  # OR
+          prefix: "/canary"
+      route: # THEN
+      - destination: # we can do weighted subset as well with prefix
+          host: fleetman-webapp
+          subset: experimental
+    - match:
+      - uri :
+          prefix: "/"
+      route:
+      - destination:
+          host: fleetman-webapp
+          subset: original
+---
+#domain name based matching and routing
+#here we configure multiple virtualService for each host(which is easy & simple to configure)
+# For local learning purpose make use of local hosts file to create DNS
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: fleetman-webapp-experiment
+  namespace: default
+spec:
+  hosts:      # which incoming host are we applying the proxy rules to???
+    - "experimental.fleetman.com"
+  gateways:
+    - ingress-gateway-configuration
+  http:
+      - route:
+        - destination:
+            host: fleetman-webapp
+            subset: experimental
+```
+
+HEADER based routing are explained under xx-dark-release
+
+Apart from all the conditional routing we can mention a catch all condition,  we can also provide name(useful for documentation)
+
+```yaml
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: fleetman-webapp
+  namespace: default
+spec:
+  hosts:      # which incoming host are we applying the proxy rules to???
+    - "*"
+  gateways:
+    - ingress-gateway-configuration
+  http:
+    - name: canary # optioanl name to the routing condition
+      match:
+      - headers:  # IF
+          my-header:
+            exact: canary
+      route: # THEN
+      - destination:
+          host: fleetman-webapp
+          subset: experimental
+    - name: safe # optional name to the routing condition
+      route: # CATCH ALL(which do not match any)
+      - destination:
+          host: fleetman-webapp
+          subset: original
 ```

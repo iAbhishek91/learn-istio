@@ -5,7 +5,7 @@
 ## What is service mesh
 
 - its is a layer of software you deploy alongside your K8s cluster(it can be any cluster where microservice based architecture is deployed.)
-- All the newtorking calls are routed through the layer(service mesh), so that it can take charge of networking. (Pods instead of invoking another pod(service) it sends the request to service mesh, service mesh then forwards the request to the target pod)
+- All the networking calls are routed through the layer(service mesh), so that it can take charge of networking. (Pods instead of invoking another pod(service) it sends the request to service mesh, service mesh then forwards the request to the target pod)
 - In between service mesh may have a "Mesh logic" to be applied on the request or on the response.
 
 ## Why Istio is requried

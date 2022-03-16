@@ -1,22 +1,25 @@
 # Terms associated with Istio
 
-- Pilot: its a older name, just consider it as control plane now or IstioD
-- Control Plane: Collectively whats running on istio-system namespace is referred as Control Plane.
-- Data Plane: The envoy proxy sidecar contianers are collectively called Data plane in Istio.
-- Jaeger: UI used for distributed tracing pod, located control plane.
-- Kiali: UI for having a overview of Istio
-- Telemetry: is basically gathering of mertices and representing things on UI, it includes Kiali, Jaeger and Grafana and more.
-- Trace: tracing entire request and response is known as trace.
-- Span: each section in a trace is called span.
-- Upstream pods/request: when a pod request another pod (that request is called upstream request)
-- Downstream pods/request: when a pod response to another pod(that request is called downstream request)
-- workloads: is  a term used by Istio and kiali
-- Application: in kiali, applications are logical grouping of workloads by "app" labels, in details its explained in canaries.md
-- Configuration types: istio objects are reffered as configuration type, these are differenet thing we can create after deploying Istio CRD.
-  - Gateway: configuration type,
-  - VirtualService: configuration type,
-  - DestinationRule: configuration type,
-  - Serviceentry: configuration type,
-  - Rule: configuration type,
-  - Quota: configuration type,
-  - QuotaSpecBinding: configuration type,
+- **Pilot**: its a older name, just consider it as control plane now or IstioD
+- **Control Plane**: Collectively whats running on istio-system namespace is referred as Control Plane.
+- **Data Plane**: The envoy proxy sidecar containers are collectively called Data plane in Istio.
+- **profile**: profiles are built-in configuration for istio. They are becoming less important now as we can manually configure Istio. *i install --set profile=demo*
+- **Jaeger**: UI used for distributed tracing pod, located control plane. Now they are managed out of Istio and are known as addons
+- **Kiali**: UI for having a overview of Istio. Now they are managed out of Istio and are known as addons
+- **Telemetry**: is basically gathering of matrices and representing things on UI, it includes Kiali, Jaeger and Grafana and more.
+- **Trace**: tracing entire request and response is known as trace.
+- **Span**: each section in a trace is called span.
+- **Upstream pods/request**: when a pod request another pod (that request is called upstream request)
+- **Downstream pods/request**: when a pod response to another pod(that request is called downstream request)
+- **workloads**: is  a term used by Istio and kiali
+- **Application**: in kiali, applications are logical grouping of workloads by "app" labels, in details its explained in canaries.md
+- Configuration types: istio objects are referred as configuration type, these are different thing we can create after deploying Istio CRD.
+  - Gateway: separate doc for this resource
+  - VirtualService: separate doc for this resource
+  - DestinationRule: separate doc for this resource
+  - Serviceentry: separate doc for this resource
+  - Sidecar: separate doc for this resource
+  - PeerAuthentication
+  - Rule: separate doc for this resource
+  - Quota: separate doc for this resource
+  - QuotaSpecBinding: separate doc for this resource

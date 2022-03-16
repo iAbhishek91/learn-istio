@@ -4,7 +4,7 @@ Its again another Istio resource.
 
 Destination rule creates the destination group based on the labels and provides a name, which is then referred by virtualService.
 
-Defination: Destination rule are configuration for *Istio load balancer*. For canary we create subsets, which pod should be part of each subset.
+Definition: Destination rule are configuration for *Istio load balancer*. For canary we create subsets, which pod should be part of each subset.
 
 ```yaml
 kind: DestinationRule
@@ -24,7 +24,7 @@ spec:
 
 ## Traffic policy and consistent hashing
 
-Consistent hashing is load balancing algorithm, where some data(like cookie or header or anything else) are hashed using a hash algorighm and then based on the hashed value we perform the load balancing.
+Consistent hashing is load balancing algorithm, where some data(like cookie or header or anything else) are hashed using a hash algorithm and then based on the hashed value we perform the load balancing.
 
 ```yaml
 kind: DestinationRule
@@ -33,7 +33,7 @@ metadata:
   name: somename
 spec:
   host: fleetman-staff-service.default.svc.cluster.local # after reaching the service, use the below pod selector
-  trafficPolicy: # define th epolicy of the load balancer how traffic will be forwarded
+  trafficPolicy: # define the policy of the load balancer how traffic will be forwarded
     loadBalancer:
       consistentHash:
         useSourceIp: true # here we are using source IP for hashing
