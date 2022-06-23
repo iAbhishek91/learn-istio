@@ -12,9 +12,10 @@ Istio is logically divided into control plane and data plane.
 
 2. **IstioD** [required]: Combination of all below components
   
-  a. **Pilot**: configs data to Envoys
+  a. **Pilot**: service discovery configs data to Envoys
+  b. **Galley**: configuration
   b. **Mixer**: Policy and telemetry
-  c. **Citadel**: TLS certs to Envoys
+  c. **Citadel**: TLS certs(certificate manager) to Envoys
   d. **Sidecar Injector**: Monitor K8s for new pods to inject Envoys
 
 3. **Ingress Gateway** [optioanl]
@@ -25,4 +26,4 @@ Istio is logically divided into control plane and data plane.
 
 1. **Envoy/sidecar/proxy**: in each pods in the mesh
 
-    a. **istio-agent**: this is part of the sidecar really, but is a separate component.
+    a. **istio-agent**: this is part of the sidecar really, but is a separate component. This helps in sidecar to connect with the Istiod.

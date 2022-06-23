@@ -1,0 +1,26 @@
+{
+    "bytes_sent": 0,
+    "upstream_local_address": null,
+    "upstream_host": null,
+    "connection_termination_details": null,
+    "route_name": "block_all", //
+    "response_code_details": "direct_response", // https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/response_code_details
+    "method": "POST",
+    "upstream_transport_failure_reason": null,
+    "start_time": "2022-05-17T09:11:19.927Z",
+    "response_flags": "-",
+    "user_agent": "elasticsearch-py/7.13.4 (Python 3.9.6)",
+    "authority": "tenant-elasticsearch-es-http.tenant-elasticsearch:9200",
+    "x_forwarded_for": null,
+    "downstream_remote_address": "10.83.12.13:48518",
+    "protocol": "HTTP/1.1",
+    "downstream_local_address": "172.20.14.126:9200",
+    "upstream_service_time": null,
+    "duration": 0,
+    "response_code": 502,
+    "request_id": "2889d164-f034-4d43-a680-0e1db45e9f0a",
+    "path": "/ga1rbqa1_alerts_*/_count",
+    "requested_server_name": null,
+    "bytes_received": 0,
+    "upstream_cluster": null
+}

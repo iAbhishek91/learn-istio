@@ -9,8 +9,8 @@
 - **Telemetry**: is basically gathering of matrices and representing things on UI, it includes Kiali, Jaeger and Grafana and more.
 - **Trace**: tracing entire request and response is known as trace.
 - **Span**: each section in a trace is called span.
-- **Upstream pods/request**: when a pod request another pod (that request is called upstream request)
-- **Downstream pods/request**: when a pod response to another pod(that request is called downstream request)
+- **Upstream pods/request**: when a pod request another pod (that request is called upstream request), client which envoy connects to
+- **Downstream pods/request**: when a pod response to another pod(that request is called downstream request), client which connects to envoy
 - **workloads**: is  a term used by Istio and kiali
 - **Application**: in kiali, applications are logical grouping of workloads by "app" labels, in details its explained in canaries.md
 - Configuration types: istio objects are referred as configuration type, these are different thing we can create after deploying Istio CRD.

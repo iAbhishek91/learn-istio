@@ -1,0 +1,26 @@
+{
+    "authority":"tenant-elasticsearch-es-http:9200", // dns of the upstream
+    "upstream_host":"10.83.10.11:9200", // pod IP of upstream
+    "request_id":"f0b6c2a2-1887-419d-a266-799436e58e0e", // x-request-id header that will be injected to each request
+    "x_forwarded_for":null, // XFF standard proxy header indicates the IP addresses that a request has flowed through on its way. null indicate that the request was just initiated.
+    "bytes_sent":13706, // packet size
+    "path":"/_all/_stats", // path, in this case its ES api
+    "downstream_local_address":"172.20.14.126:9200",
+    "response_flags":"-", // https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#config-access-log-format-response-flags
+    "method":"GET",
+    "route_name":"default",
+    "upstream_transport_failure_reason":null,
+    "response_code_details":"via_upstream",
+    "start_time":"2022-05-12T21:54:59.508Z",
+    "requested_server_name":null,
+    "duration":19,
+    "upstream_cluster":"outbound|9200||tenant-elasticsearch-es-http.tenant-elasticsearch.svc.cluster.local",
+    "user_agent":"Go-http-client/1.1",
+    "protocol":"HTTP/1.1",
+    "connection_termination_details":null,
+    "downstream_remote_address":"10.83.147.160:42466",
+    "upstream_local_address":"10.83.147.160:48482",
+    "response_code":200, // this should be sometime enough to point to actual problem
+    "upstream_service_time":"19",
+    "bytes_received":0
+ }
