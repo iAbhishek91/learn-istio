@@ -11,6 +11,16 @@ i version
 # data plane version: 1.10.4
 ```
 
+you can also check the version of envoy used by a specific version of Istio.
+
+```sh
+k exec -it <pod-name with in the mesh> -c istio-proxy -- /bin/sh
+
+envoy --version
+```
+
+> more you can reach any envoy using curl and perform GET and POST operation. curl localhost:15000/server_info
+
 > version can also be determined by the image deployed in istiod - pilot:1.10.4
 
 ## Step-1: Determine the issue with data plane components
@@ -132,7 +142,8 @@ By default the log level is WARNING, we need to change it to DEBUG. NOTE: this i
 i pc log <pod> --level debug # no restart required recommended way
 
 ## there are differnt types of logger (enable few)
-i pc log matching-live-indexer-68c6865dc8-g94qb --level upstream:debug,connection:debug
+i pc log <pod-name in the mesh> --level upstream:debug,connection:debug
+i pc log <pod-name in the mesh> --level router:debug,http:debug,pool:debug,client:debug,connection:debug
 
 # other ways
 ## add pod annotation: to make change in the sidecar we need to restart the po
@@ -141,6 +152,8 @@ k annotate po <po-name> "sidecar.istio.io/logLevel=debug"
 ## enable globally: this also need pod restart
 i install --set profile=demo --set values.global.proxy.logLevel=debug
 ```
+
+> Refer to 12d-sample-envoy-debug-log.json
 
 #### Envoy configuration dump
 
